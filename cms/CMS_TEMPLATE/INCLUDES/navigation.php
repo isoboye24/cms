@@ -18,8 +18,7 @@
                   
                   
                   <?php
-                    global $connection;
-                    
+                                        
                     $query = "SELECT * FROM categories";
                     $select_all_categories_query = mysqli_query($connection, $query);
                     
