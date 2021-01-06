@@ -22,7 +22,7 @@
                         <div class="col-xs-6">
 
 <!--    Add categories-->
-  <?php Insert_categories(); ?> 
+  <?php InsertCategories(); ?> 
 <!-- Add categories  -->                        
 
                             <form action="" method="post">
@@ -35,18 +35,9 @@
                                 </div> 
                                 
                             </form>
-                            
-<?php 
-         // Open edit form
-                            
-                            if(isset($_GET['edit']))
-                            {
-                                $cat_id = $_GET['edit'];
-                                
-                                include "INCLUDES/update_categories.php";
-                            }
-                            
-?>
+ 
+<!--Open edit form -->
+<?php UpdateCategories(); ?>
                             
                          </div> <!--   Add category form-->
                          
@@ -62,40 +53,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>                                   
-<?php 
-       //Find all categories
-                                 
-        $query = "SELECT * FROM categories";
-        $select_categories = mysqli_query($connection, $query);
-                                    
-        while($row = mysqli_fetch_assoc($select_categories))
-        {
-            $cat_id = $row['cat_id'];
-            $cat_title = $row['cat_title'];
-            
-            echo "<tr>";
-            echo "<td>{$cat_id}</td>";
-            echo "<td>{$cat_title}</td>";
-            echo "<td> <a href='categories.php?delete={$cat_id}'> Delete </a></td>";
-            echo "<td> <a href='categories.php?edit={$cat_id}'> Edit </a></td>";
-            echo "</tr>";
-        }                       
-?>
 
-<?php                                     
-   
-    //Delete category
-                                    
-    if(isset($_GET['delete']))
-    {
-        $the_cat_id = $_GET['delete'];
-        
-        $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
-        $delete_query = mysqli_query($connection, $query);
-        
-        header("location: categories.php"); //The refreshes the page to avoid double clicking before the above action takes place.
-    }
- ?>                                   
+<!-- Find all categories -->
+<?php FindAllCategories(); ?>
+
+
+<!-- Delete category -->
+<?php DeleteCategories(); ?>                                   
                                    
                                 </tbody>
                             </table>
