@@ -22,6 +22,7 @@
                            
 <?php 
 
+   // Add categories
   if(isset($_POST['submit']))
   {
       $cat_title = $_POST['cat_title'];
@@ -45,10 +46,8 @@
       }
   }
                             
-?>                           
-                           
-                           
-                           
+?> <!-- Add categories  -->                        
+
                            
                            
                             <form action="" method="post">
@@ -58,10 +57,25 @@
                                 </div>
                                 <div class="form-group">
                                     <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
-                                </div>
+                                </div> 
                                 
                             </form>
+                            
+<?php 
+         // Open edit form
+                            
+                            if(isset($_GET['edit']))
+                            {
+                                $cat_id = $_GET['edit'];
+                                
+                                include "INCLUDES/update_categories.php";
+                            }
+                            
+?>
+                            
                          </div> <!--   Add category form-->
+                         
+                         
                          
                         <div class="col-xs-6"> <!--  category table -->                                                  
 
@@ -88,6 +102,7 @@
             echo "<td>{$cat_id}</td>";
             echo "<td>{$cat_title}</td>";
             echo "<td> <a href='categories.php?delete={$cat_id}'> Delete </a></td>";
+            echo "<td> <a href='categories.php?edit={$cat_id}'> Edit </a></td>";
             echo "</tr>";
         }                       
 ?>
