@@ -1,3 +1,6 @@
+<?php include "../INCLUDES/db.php"; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
