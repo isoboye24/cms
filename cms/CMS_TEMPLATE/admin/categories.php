@@ -1,4 +1,5 @@
 <?php  include "INCLUDES/admin_header.php"; ?>
+<?php  include "functions.php"; ?>
 
     <div id="wrapper">
 
@@ -19,37 +20,11 @@
                         </h1>
                         
                         <div class="col-xs-6">
-                           
-<?php 
 
-   // Add categories
-  if(isset($_POST['submit']))
-  {
-      $cat_title = $_POST['cat_title'];
-      
-      if($cat_title == "" || empty($cat_title))
-      {
-          echo "This field should not be empty";
-      }
-      else
-      {
-          $query = "INSERT INTO categories(cat_title) ";
-          $query .= "VALUE('{$cat_title}')";
-          
-          $create_category_query = mysqli_query($connection, $query);
-          
-          if(!$create_category_query)
-          {
-              die("QUERY FAILED" . mysqli_error($connection));
-          }
-          
-      }
-  }
-                            
-?> <!-- Add categories  -->                        
+<!--    Add categories-->
+  <?php Insert_categories(); ?> 
+<!-- Add categories  -->                        
 
-                           
-                           
                             <form action="" method="post">
                                <label for="cat-title">Add Category </label>
                                 <div class="form-group">

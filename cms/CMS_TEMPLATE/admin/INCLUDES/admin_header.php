@@ -1,5 +1,8 @@
 <?php ob_start(); ?>
+
 <?php include "../INCLUDES/db.php"; ?>
+
+
 
 
 <!DOCTYPE html>
