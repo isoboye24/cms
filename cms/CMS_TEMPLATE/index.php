@@ -29,7 +29,7 @@
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
                 
-        ?>
+?>
         
            <h1 class="page-header">
                     Page Heading
