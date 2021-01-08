@@ -1,5 +1,14 @@
 <?php 
 
+function ConfirmQuery($result)
+{
+    if(!$result)
+    {
+        die("QUERY FAILED".mysqli_error($connection));
+    }
+        
+}
+
 function InsertCategories()
 {
     global $connection;
