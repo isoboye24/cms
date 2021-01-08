@@ -53,16 +53,7 @@
     }         
                                 
  ?>                                  
-                                   
-                                    <td>10</td>
-                                    <td>Bootstrap Framework</td>
-                                    <td>Isoboye Vincent</td>
-                                    <td>Bootstrap</td>
-                                    <td>Status</td>
-                                    <td>Image</td>
-                                    <td>comments</td>
-                                    <td>Tags</td>
-                                    <td>Date</td>
+                                  
                                 
                             </tbody>
                         </table>
