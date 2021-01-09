@@ -25,30 +25,30 @@
 
         }
 
-        if(isset($_POST['update_post']))
+    if(isset($_POST['update_post']))
     {
          // Pick from the input box to the exact variables holding data from the db in the above. Thereby changing them.
-        $post_category_id = $_POST['post_category_id'];
+        $post_category_id = $_POST['post_category'];
         $post_title = $_POST['post_title'];
         $post_author = $_POST['post_author'];       
         $post_status = $_POST['post_status'];       
                 
-        $post_image = $_FILES['image']['name'];
-        $post_image_temp = $_FILES['image']['tmp_name'];        
+//        $post_image = $_FILES['image']['name'];
+//        $post_image_temp = $_FILES['image']['tmp_name'];        
         
         $post_tags = $_POST['post_tags'];
         $post_content = $_POST['post_content'];
         
                 
-        //Making the image stay when update post is clicked.
-        move_uploaded_file($post_image_temp, "../images/$post_image");
+//        Making the image stay when update post is clicked.
+        //move_uploaded_file($post_image_temp, "../images/$post_image");
         
         if(empty($post_image))
         {
             $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
             $select_image = mysqli_query($connection, $query);
             
-            while($row = mysqli_fetch_assoc($select_image))
+            while($row = mysqli_fetch_array($select_image))
             {
                 $post_image = $row['post_image'];
             }
@@ -84,7 +84,7 @@
            
            <p class="form-group">
                 <label for="title">Post Title</label>
-                <input type="text" class="form-control" name="title" value="<?php echo $post_title ?>">
+                <input type="text" class="form-control" name="post_title" value="<?php echo $post_title ?>">
            </p>          
 
             <p class="form-group">
@@ -118,7 +118,7 @@
 
             <p class="form-group">
                 <label for="author">Post Author</label>
-                <input type="text" class="form-control" name="author" value="<?php echo $post_author ?>">
+                <input type="text" class="form-control" name="post_author" value="<?php echo $post_author ?>">
             </p>
 
             <p class="form-group">
