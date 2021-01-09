@@ -25,8 +25,57 @@
 
         }
 
+        if(isset($_POST['update_post']))
+    {
+         // Pick from the input box to the exact variables holding data from the db in the above. Thereby changing them.
+        $post_category_id = $_POST['post_category_id'];
+        $post_title = $_POST['post_title'];
+        $post_author = $_POST['post_author'];       
+        $post_status = $_POST['post_status'];       
+                
+        $post_image = $_FILES['image']['name'];
+        $post_image_temp = $_FILES['image']['tmp_name'];        
+        
+        $post_tags = $_POST['post_tags'];
+        $post_content = $_POST['post_content'];
+        
+                
+        //Making the image stay when update post is clicked.
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+        
+        if(empty($post_image))
+        {
+            $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
+            $select_image = mysqli_query($connection, $query);
+            
+            while($row = mysqli_fetch_assoc($select_image))
+            {
+                $post_image = $row['post_image'];
+            }
+            
+        }
+        
+        
+        //Edit and put the data into the db.
+        $query = "UPDATE posts SET ";
+        $query .= "post_category_id = '{$post_category_id}', ";
+        $query .= "post_title = '{$post_title}', ";
+        $query .= "post_author = '{$post_author}', ";
+        $query .= "post_status = '{$post_status}', ";
+        $query .= "post_tags = '{$post_tags}', ";
+        $query .= "post_image = '{$post_image}', ";
+        $query .= "post_date = now(), ";
+        $query .= "post_content = '{$post_content}' ";             
+        $query .= "WHERE post_id = {$the_post_id} ";
+        
+        $update_post = mysqli_query($connection, $query);
 
-    ?>
+        ConfirmQuery($update_post);        
+    }
+
+?>
+    
+    
 
    <form action="" method="post" enctype="multipart/form-data">
    <!--Enctype is in charge of sending form data.-->
