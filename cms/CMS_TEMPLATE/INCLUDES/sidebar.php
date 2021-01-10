@@ -31,7 +31,7 @@
 <?php
                                         
         $query = "SELECT * FROM categories";
-        $select_categories_query = mysqli_query($connection, $query);
+        $select_categories_sidebar = mysqli_query($connection, $query);
 ?>
            
            
@@ -41,10 +41,13 @@
                     <ul class="list-unstyled">
 <?php
  
-        while($row = mysqli_fetch_assoc($select_categories_query))
+        while($row = mysqli_fetch_assoc($select_categories_sidebar))
         {
             $cat_title = $row['cat_title'];
-            echo "<li><a href='#'>{$cat_title}</a></li>";
+            $cat_id = $row['cat_id'];
+            
+            //Senidng the cat_id to the category.php page using the superglobal GET.
+            echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
         }                       
 ?>                       
                     </ul>
