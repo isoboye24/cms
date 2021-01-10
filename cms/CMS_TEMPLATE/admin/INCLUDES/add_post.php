@@ -21,7 +21,7 @@
         $post_comment_count = 4;
         
         //Function for uploading files
-        move_uploaded_file($post_image_temp, "../images/$post_image");
+        move_uploaded_file($post_image_temp, "images/$post_image");
         
         //Insert data from the webpage to the db
         $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status)";
