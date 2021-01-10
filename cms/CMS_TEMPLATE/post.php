@@ -90,8 +90,7 @@
 
         $update_comment_query = mysqli_query($connection, $query);  
          
-     }
-         
+     }        
                 
 ?>
             
@@ -157,9 +156,6 @@
      }               
 ?>
      
-                
-
-                
 
                 
             </div>
