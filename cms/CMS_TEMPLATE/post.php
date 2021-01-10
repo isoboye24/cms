@@ -20,7 +20,7 @@
    }
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
-    $query = "SELECT * FROM posts WHERE post_id = $the_post_id "; 
+    $query = "SELECT * FROM posts WHERE post_status = 'published' "; 
 
     $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -34,7 +34,7 @@
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
-        
+
 ?>
         
            <h1 class="page-header">
@@ -58,7 +58,8 @@
 
             <hr>
         
-    <?php 
+    <?php
+        
         }
     ?>
        
@@ -100,16 +101,16 @@
                     <form action="" method="post" role="form">
                       <div class="form-group">
                          <label for="author">Author</label>
-                          <input type="text" class="form-control" name="comment_author">
+                          <input type="text" class="form-control" name="comment_author" required>
                       </div>
                        <div class="form-group">
                          <label for="email">Email</label>
-                          <input type="email" class="form-control" name="comment_email">
+                          <input type="email" class="form-control" name="comment_email" required>
                       </div>
                                               
                         <div class="form-group">
                            <label for="Comment">Your Comment</label>
-                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                            <textarea name="comment_content" class="form-control" rows="3" required></textarea>
                         </div>
                         
                         <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>

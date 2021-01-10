@@ -29,7 +29,14 @@
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
-                
+        
+        if($post_status !== "Published")
+        {
+            echo "<h1 class='text-center'> SORRY, NO POST </h1>";
+        }
+        else
+        {       
+             
 ?>
         
            <h1 class="page-header">
@@ -54,7 +61,8 @@
 
             <hr>
         
-    <?php 
+    <?php
+            }
         }
     ?>
 
