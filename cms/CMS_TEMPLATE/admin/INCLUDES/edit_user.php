@@ -100,9 +100,32 @@
              
              <p class="form-group">        
                 <select name="user_role" id="">
-                    <option value="Subscriber">Select options</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Subscriber">Subscriber</option>                  
+<!--                    <option value="Subscriber"><?php echo $user_role; ?></option>-->
+
+<?php
+
+    if($user_role == 'admin')
+    {
+        echo "<option value='subscriber'>subscriber</option>";
+        echo "<option value='collaborator'>collaborator</option>";
+    }
+    else if($user_role == 'subscriber')
+    {
+        echo "<option value='admin'>admin</option>";
+        echo "<option value='collaborator'>collaborator</option>";
+    }
+    else
+    {
+        echo "<option value='subscriber'>subscriber</option>";
+        echo "<option value='admin'>admin</option>";
+    }
+
+?>
+                    
+                    
+                    
+                    
+                                      
                 </select>          
            </p>
            
