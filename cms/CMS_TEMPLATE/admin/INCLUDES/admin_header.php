@@ -4,23 +4,10 @@
 
 <?php
 
-if(isset($_SESSION['user_role']))
-{
-    if($_SESSION['user_role'] !== 'Admin')
-    {
+    if(!isset($_SESSION['user_role']))
+    {   
         header("Location: ../index.php");
     }
-//    else if($_SESSION['user_role'] == 'admin')
-//    {
-//        header("Location: ../index.php");
-//    }
-//    else
-//    {
-//        header("Location: ../../index.php");
-//    }
-}
-
-
 
 ?>
 
