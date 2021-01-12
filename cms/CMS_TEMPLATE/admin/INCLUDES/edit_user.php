@@ -9,7 +9,7 @@
     }
 
         //Take the data from the db where the id = id of the url
-        $query = "SELECT * FROM users WHERE user_id = $the_user_id ";
+        $query = "SELECT * FROM users WHERE user_id = {$the_user_id} ";
         $select_users_by_id = mysqli_query($connection, $query);
 
         while($row = mysqli_fetch_assoc($select_users_by_id))
@@ -66,11 +66,7 @@
         
         $update_user = mysqli_query($connection, $query);
 
-        //ConfirmQuery($update_post); 
-        if(!$update_user)
-        {
-            die("QUERY ERROR ". mysqli_error($connection));
-        }
+        ConfirmQuery($update_user);         
     }
 
 ?>
