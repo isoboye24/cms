@@ -25,7 +25,7 @@
         <!-- Login -->
         <div class="well">
            <h4>Login</h4>
-               <form action="INCLUDE/login.php" method="post">                       
+               <form action="INCLUDES/login.php" method="post">                       
                     <div class="form-group">
                         <input name="username" type="text" class="form-control" placeholder="Enter Username">                        
                     </div>
