@@ -1,8 +1,6 @@
-<?php ob_start(); ?>
-
 <?php include "../INCLUDES/db.php"; ?>
-
-
+<?php ob_start(); ?>
+<?php session_start(); ?> <!-- This function starts the session.-->
 
 
 <!DOCTYPE html>
