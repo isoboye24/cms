@@ -30,13 +30,9 @@
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
         
-        if($post_status !== "Published")
-        {
-            echo "<h1 class='text-center'> SORRY, NO POST </h1>";
-        }
-        else
-        {       
-             
+        if($post_status == "Published")
+        {   
+       
 ?>
         
            <h1 class="page-header">
