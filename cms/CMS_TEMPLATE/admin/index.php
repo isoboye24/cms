@@ -171,9 +171,13 @@
                     
 <?php 
 
-    $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+    $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+    $select_all_published_posts = mysqli_query($connection, $query);                      
+    $post_published_count = mysqli_num_rows($select_all_published_posts); 
+    
+    $query = "SELECT * FROM posts WHERE post_status = 'Draft' ";
     $select_all_draft_posts = mysqli_query($connection, $query);                      
-    $post_draft_count = mysqli_num_rows($select_all_draft_posts);                        
+    $post_draft_count = mysqli_num_rows($select_all_draft_posts);                 
 
     $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
     $unapproved_comment_query = mysqli_query($connection, $query);                      
@@ -199,10 +203,10 @@
                     
 <?php 
 
-    $elements_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];                
-    $elements_count = [$post_count, $post_draft_count, $comment_count, $unapproved_comment_count, $user_count, $subscribers_count, $category_count];                
+    $elements_text = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];                
+    $elements_count = [$post_count, $post_published_count, $post_draft_count, $comment_count, $unapproved_comment_count, $user_count, $subscribers_count, $category_count];                
 
-    for($i = 0; $i < 7; $i++)
+    for($i = 0; $i < 8; $i++)
     {
         echo "['{$elements_text[$i]}'". ", ". "{$elements_count[$i]}],";
     }
@@ -229,17 +233,10 @@
         
 <!--        To pull the chart in the script else the chart will not function-->
         <div id="columnchart_material" style="width: auto; height: 500px;"></div>
-        
-        
-        
-        
+
         
     </div>                
-                    
-                    
-                    
-                    
-                    
+                        
                     
             </div>
             <!-- /.container-fluid -->
