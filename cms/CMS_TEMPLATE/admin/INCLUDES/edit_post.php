@@ -70,11 +70,9 @@
         
         $update_post = mysqli_query($connection, $query);
 
-        //ConfirmQuery($update_post); 
-        if(!$update_post)
-        {
-            die("QUERY ERROR ". mysqli_error($connection));
-        }
+        ConfirmQuery($update_post); 
+        
+        echo "Post updated. <a class='bg-success'; href='../post.php?p_id={$the_post_id}'> View posts </a> or <a href='posts.php'> Edit more posts</a>";
     }
 
 ?>
