@@ -28,6 +28,8 @@
         $create_post_user = mysqli_query($connection, $query);
         
         ConfirmQuery($create_post_user);
+        
+        echo "User Created". " ". "<a href='users.php'>View Users</a>";
     }
 
 ?>

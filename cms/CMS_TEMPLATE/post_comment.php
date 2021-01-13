@@ -20,7 +20,7 @@
    }
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
-    $query = "SELECT * FROM posts WHERE post_id = {$the_post_id} "; 
+    $query = "SELECT * FROM posts WHERE post_status = 'published' "; 
 
     $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -44,7 +44,7 @@
 
             <!-- First Blog Post -->
             <h2>
-                <a href="#"><?php echo $post_title; ?></a>
+                <a href="post_comment.php?&p_id=<?php echo $the_post_id; ?>"><?php echo $post_title; ?></a>
             </h2>
             <p class="lead">
                 by <a href="index.php"><?php echo $post_author; ?></a>
