@@ -50,10 +50,14 @@
             </p>
             <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date; ?></p>
             <hr>
-            <img class="img-responsive" src="admin/images/<?php echo $post_image; ?>" alt="Image not found">
-            <hr>
-            <p><?php echo $post_content; ?></p>
             
+            <a href="post.php?p_id=<?php echo $post_id; ?>">
+                <img class="img-responsive" src="admin/images/<?php echo $post_image; ?>" alt="Image not found" width="400" height="400">
+            </a>
+            <hr>
+            
+            <p><?php echo $post_content; ?></p>
+            <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
             <hr>
         
