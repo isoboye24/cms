@@ -72,24 +72,30 @@
          $comment_email =$_POST['comment_email'];
          $comment_content =$_POST['comment_content'];
          
-         $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
-         
-         $query .= "VALUE($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'Unapproved', 'now()') ";
-         
-         $create_comment = mysqli_query($connection, $query);
-         
-         if(!$create_comment)
+         if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content))
          {
-             die("QUERY FAILED ". mysqli_error($connection));
-         }
-         
-         
-         // query to increment the post comment count                        
-        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";            
-        $query .= "WHERE post_id = $the_post_id ";            
+             $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
 
-        $update_comment_query = mysqli_query($connection, $query);  
-         
+             $query .= "VALUE($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'Unapproved', 'now()') ";
+
+             $create_comment = mysqli_query($connection, $query);
+
+             if(!$create_comment)
+             {
+                 die("QUERY FAILED ". mysqli_error($connection));
+             }
+
+
+             // query to increment the post comment count                        
+            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";            
+            $query .= "WHERE post_id = $the_post_id ";            
+
+            $update_comment_query = mysqli_query($connection, $query);  
+         }
+         else
+         {
+             echo "<script>alert('Fields cannot be empty')</script>";
+         }
      }        
                 
 ?>
@@ -100,16 +106,16 @@
                     <form action="" method="post" role="form">
                       <div class="form-group">
                          <label for="author">Author</label>
-                          <input type="text" class="form-control" name="comment_author" required>
+                          <input type="text" class="form-control" name="comment_author">
                       </div>
                        <div class="form-group">
                          <label for="email">Email</label>
-                          <input type="email" class="form-control" name="comment_email" required>
+                          <input type="email" class="form-control" name="comment_email">
                       </div>
                                               
                         <div class="form-group">
                            <label for="Comment">Your Comment</label>
-                            <textarea name="comment_content" class="form-control" rows="3" required></textarea>
+                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
                         </div>
                         
                         <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
