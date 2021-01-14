@@ -1,16 +1,66 @@
+<?php 
 
+    if(isset($_POST['checkboxArray']))
+    {
+        foreach($_POST['checkboxArray'] as $post_value_id)
+        {
+            $bulk_options = $_POST['bulk_options'];
+            
+            switch($bulk_options)
+            {
+                case 'Published':
+                    
+                    $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$post_value_id} ";
+                    $update_to_published_status = mysqli_query($connection, $query);
+                    
+                    confirmQuery($update_to_published_status);
+                    
+                    break;
+                
+                case 'Draft':
+                    
+                    $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$post_value_id} ";
+                    $update_to_draft_status = mysqli_query($connection, $query);
+                    
+                    confirmQuery($update_to_draft_status);
+                    
+                    break;
+                    
+                    case 'Delete':
+                    
+                    $query = "DELETE FROM posts WHERE post_id = {$post_value_id} ";
+                    $update_to_delete_status = mysqli_query($connection, $query);
+                    
+                    confirmQuery($update_to_delete_status);
+                    
+                    break;
+                    
+                    
+            }
+        }
+    }
+
+
+
+
+
+?>
+               
+                 
+                     
                       <form action="" method="post">
                            
                         <table class="table table-bordered table-hover">
                            
                            <div id="bulkOptionContainer" class="col-xs-4">
                                
-                                  <select class="form-control" name="" id="">
+                            <!-- The value of the option is carried away to PHP calculation by the name attribute of the select.-->
+                                  <select class="form-control" name="bulk_options" id="">
                                    
                                       <option value="">Select Options</option>
-                                      <option value="">Published</option>
-                                      <option value="">Draft</option>
-                                      <option value="">Delete</option>
+                                      <option value="Published">Published</option>
+                                      <option value="Draft">Draft</option>
+                                      <option value="Delete">Delete</option>
                                       
                                </select>                               
                                
@@ -26,7 +76,8 @@
                            
                            
                             <thead>
-                                <tr>                                   
+                                <tr>
+                                   <th><input type="checkbox" id="selectAllBoxes"></th>
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Author</th>
@@ -63,9 +114,14 @@
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
-        
+?>
+ 
+             <td><input type='checkbox' class='checkBoxes' name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>       
+               
+                             
+<?php
 
-        echo "<tr>";
+        echo "<tr>";        
         echo "<td>{$post_id}</td>";
         echo "<td>{$post_title}</td>";
         echo "<td>{$post_author}</td>";
