@@ -68,7 +68,7 @@
                            
                            <div class="col-xs-4">                               
                                <input type="submit" name="submit" class="btn btn-success" value="Apply">
-                               <a class="btn btn-primary" href="add_post.php">Add New</a>                               
+                               <a class="btn btn-primary" href="posts.php?source=add_post">Add New</a>                               
                            </div>
                            
                            
@@ -77,7 +77,7 @@
                            
                             <thead>
                                 <tr>
-                                   <th><input type="checkbox" id="selectAllBoxes"></th>
+                                   <th><input type="checkbox" id="selectAllBoxes"></th>  
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Author</th>
@@ -87,6 +87,7 @@
                                     <th>Comments</th>
                                     <th>Tags</th>                                    
                                     <th>Date</th>
+                                    <th>View Post</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -114,14 +115,15 @@
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
+
+        echo "<tr>"; 
 ?>
- 
              <td><input type='checkbox' class='checkBoxes' name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>       
                
                              
 <?php
 
-        echo "<tr>";        
+              
         echo "<td>{$post_id}</td>";
         echo "<td>{$post_title}</td>";
         echo "<td>{$post_author}</td>";
@@ -144,6 +146,7 @@ while($row = mysqli_fetch_assoc($select_categories_id))
         echo "<td>{$post_comment_count}</td>";
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_date}</td>";
+        echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
         echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
                 
