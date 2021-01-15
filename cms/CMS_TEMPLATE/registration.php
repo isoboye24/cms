@@ -24,6 +24,9 @@
 
             $row = mysqli_fetch_array($select_randSalt_query);        
             $salt = $row['randSalt'];
+            
+            // password encryption to prevent hackers
+            $password = crypt($password, $salt);
 
             $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
             $query .= "VALUE('{$username}', '{$email}', '{$password}', 'Subscriber') ";
