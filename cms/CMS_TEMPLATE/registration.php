@@ -10,26 +10,40 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         
-        //Using the escape to test and clear it.
-        $username = mysqli_real_escape_string($connection, $username);
-        $email = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
+         if(!empty($username) && !empty($email) && !empty($password))
+         {
+                 //Using the escape to test and clear it.
+            $username = mysqli_real_escape_string($connection, $username);
+            $email = mysqli_real_escape_string($connection, $email);
+            $password = mysqli_real_escape_string($connection, $password);
+
+            $query = "SELECT randSalt FROM users";
+            $select_randSalt_query = mysqli_query($connection, $query);
+
+            ConfirmQuery($select_randSalt_query);        
+
+            $row = mysqli_fetch_array($select_randSalt_query);        
+            $salt = $row['randSalt'];
+
+            $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+            $query .= "VALUE('{$username}', '{$email}', '{$password}', 'Subscriber') ";
+
+            $register_user_query = mysqli_query($connection, $query);
+            ConfirmQuery($register_user_query);
+             
+            $message = "Your registration has been submitted";
+         }
+         else
+         {
+            $message = "Fields cannot be empty";
+         }
         
-        $query = "SELECT randSalt FROM users";
-        $select_randSalt_query = mysqli_query($connection, $query);
-        
-        ConfirmQuery($select_randSalt_query);        
-        
-        $row = mysqli_fetch_array($select_randSalt_query);        
-        $salt = $row['randSalt'];
-        
-        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-        $query .= "VALUE('{$username}', '{$email}', '{$password}', 'Subscriber') ";
-        
-        $register_user_query = mysqli_query($connection, $query);
-        ConfirmQuery($register_user_query);
-       
     }
+    else // Incase of we don't click the submit button and the page is refreshed PHP is going to look for what to echo and that will give an error hence, this lines of code.
+    {
+        $message = "";
+    }
+
 ?>
 
    
@@ -49,6 +63,8 @@
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                       
+                       <h4 class="text-center"><?php echo $message; ?></h4>
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">

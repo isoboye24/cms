@@ -102,18 +102,18 @@
 
     if($user_role == 'admin')
     {
-        echo "<option value='subscriber'>subscriber</option>";
-        echo "<option value='collaborator'>collaborator</option>";
+        echo "<option value='Subscriber'>subscriber</option>";
+        echo "<option value='Collaborator'>collaborator</option>";
     }
     else if($user_role == 'subscriber')
     {
-        echo "<option value='admin'>admin</option>";
-        echo "<option value='collaborator'>collaborator</option>";
+        echo "<option value='Admin'>admin</option>";
+        echo "<option value='Collaborator'>collaborator</option>";
     }
     else
     {
-        echo "<option value='subscriber'>subscriber</option>";
-        echo "<option value='admin'>admin</option>";
+        echo "<option value='Subscriber'>subscriber</option>";
+        echo "<option value='Admin'>admin</option>";
     }
 
 ?>
