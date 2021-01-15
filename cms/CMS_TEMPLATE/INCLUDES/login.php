@@ -27,6 +27,9 @@
              $db_user_role = $row['user_role'];
         }
         
+        // password encryption to prevent hackers
+            $password = crypt($password, $db_user_password);
+        
         if($username === $db_username && $password === $db_user_password)
         {
             // Adding values into session
