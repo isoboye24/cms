@@ -1,5 +1,6 @@
-<?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "INCLUDES/db.php"; ?>
+ <?php  include "INCLUDES/header.php"; ?>
+ <?php  include "admin/functions.php"; ?>
 
 <?php
 
@@ -16,10 +17,18 @@
         
         $query = "SELECT randSalt FROM users";
         $select_randSalt_query = mysqli_query($connection, $query);
-        if(!$select_randSalt_query)
-        {
-            die("QUERY FAILED". mysqli_error($connection));
-        }
+        
+        ConfirmQuery($select_randSalt_query);        
+        
+        $row = mysqli_fetch_array($select_randSalt_query);        
+        $salt = $row['randSalt'];
+        
+        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+        $query .= "VALUE('{$username}', '{$email}', '{$password}', 'Subscriber') ";
+        
+        $register_user_query = mysqli_query($connection, $query);
+        ConfirmQuery($register_user_query);
+       
     }
 ?>
 

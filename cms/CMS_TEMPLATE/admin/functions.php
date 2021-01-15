@@ -96,5 +96,4 @@ function QueryCheck($query)
 
 
 
-
 ?>
