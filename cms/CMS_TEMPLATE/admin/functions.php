@@ -84,16 +84,5 @@ function UpdateCategories()
     }
 }
 
-function QueryCheck($query)
-{
-    if(!$query)
-    {
-        die("QUERY FAILED". mysqli_error($connection));
-    }
-}
-
-
-
-
 
 ?>

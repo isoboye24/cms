@@ -104,8 +104,8 @@
 
              
              <p class="form-group">        
-                <select name="user_role" id="">
-<!--                    <option value="Subscriber"><?php echo $user_role; ?></option>-->
+                <select name="user_role" id="" class="form-control">
+                    <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
 
 <?php
 

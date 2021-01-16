@@ -15,7 +15,7 @@
         $query = "SELECT * FROM users WHERE username = '{$username}' ";
         $select_user_query = mysqli_query($connection, $query);
         
-        QueryCheck($select_user_query);
+        ConfirmQuery($select_user_query);
         
          while($row = mysqli_fetch_array($select_user_query))
         {
@@ -27,14 +27,22 @@
              $db_user_role = $row['user_role'];
         }
         
-        // password encryption to prevent hackers
-            $password = crypt($password, $db_user_password);
+        // Fetch randSalt
+        $query = "SELECT randSalt FROM users"; 
+        $select_randsalt_query = mysqli_query($connection, $query);
+
+        ConfirmQuery($select_randsalt_query);
+        
+        $row = mysqli_fetch_array($select_randsalt_query);
+        $salt = $row['randSalt'];
+        $password = crypt($password, $salt);
+        
         
         if($username === $db_username && $password === $db_user_password)
         {
             // Adding values into session
             $_SESSION['username'] = $db_username;
-            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['firstname'] = $password;
             $_SESSION['lastname'] = $db_user_lastname;
             $_SESSION['user_role'] = $db_user_role;
             
