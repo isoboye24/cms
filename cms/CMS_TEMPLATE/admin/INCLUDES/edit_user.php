@@ -52,14 +52,23 @@
 //            }
 //            
 //        }
-//        
+            
+            // Steps to display shorter password when it is showing long hashed password. But, from PHP 8.0.0 this is no longer needed because PHP has already done with that.
+            $query = "SELECT randSalt FROM users";
+            $select_randSalt_query = mysqli_query($connection, $query);
+            ConfirmQuery($select_randSalt_query);
+            $row = mysqli_fetch_array($select_randSalt_query);        
+            $salt = $row['randSalt'];        
+            // password encryption to prevent hackers
+            $hashed_password = crypt($user_password, $salt);
+                
         
         //Edit and put the data into the db.
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
         $query .= "user_lastname = '{$user_lastname}', ";
         $query .= "username = '{$username}', ";
-        $query .= "user_password = '{$user_password}', ";
+        $query .= "user_password = '{$hashed_password}', ";
         $query .= "user_email = '{$user_email}', ";
         $query .= "user_role = '{$user_role}' ";                 
         $query .= "WHERE user_id = {$the_user_id} ";
