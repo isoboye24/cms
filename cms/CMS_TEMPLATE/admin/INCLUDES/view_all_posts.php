@@ -124,7 +124,7 @@
 <?php
                                 
     global $connection;
-    $query = "SELECT * FROM posts";
+    $query = "SELECT * FROM posts ORDER BY post_id DESC";
     $select_posts = mysqli_query($connection, $query);
                                 
     if(!$select_posts)
