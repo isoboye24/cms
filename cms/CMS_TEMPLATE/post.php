@@ -1,5 +1,6 @@
 <?php include "INCLUDES/db.php"; ?>
 <?php include "INCLUDES/header.php"; ?>
+<?php include "admin/functions.php"; ?>
 
     <!-- Navigation -->
 <?php include "INCLUDES/navigation.php"; ?>    
@@ -17,7 +18,11 @@
    if(isset($_GET['p_id']))
    {
        $the_post_id = $_GET['p_id'];
-   }
+       
+       $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$the_post_id} ";
+       $send_query = mysqli_query($connection, $view_query);
+       ConfirmQuery($send_query);
+   
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
     $query = "SELECT * FROM posts WHERE post_id = {$the_post_id} "; 
@@ -57,10 +62,16 @@
 
             <hr>
         
-    <?php
+<?php
         
         }
-    ?>
+   }
+   else
+   {
+       header("Location: index.php");
+   }
+                          
+?>
        
 <?php
                 
