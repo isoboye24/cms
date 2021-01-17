@@ -13,6 +13,7 @@
             <div class="col-md-8">
                 
 <?php 
+      $per_page = 3;          
         
      if(isset($_GET['page']))
      {
@@ -30,7 +31,7 @@
      }
      else
      {
-         $page_1 = ($page * 5) - 5;
+         $page_1 = ($page * $per_page) - $per_page;
      }
                 
                 
@@ -40,12 +41,12 @@
      $find_count = mysqli_query($connection, $post_query_count);           
      $count = mysqli_num_rows($find_count);           
      
-     $count = ceil($count / 5);           
+     $count = ceil($count / $per_page);           
                 
                 
                 
                 
-    $query = "SELECT * FROM posts LIMIT $page_1, 5";
+    $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
 
     $select_all_posts_query = mysqli_query($connection, $query);
 
