@@ -91,7 +91,7 @@
 
             <p class="form-group">
 <!--               To show the options of the category from the category table incase it also need to be changed-->
-            <select name="post_category" id="">
+            <select name="post_category" id="" class="form-control">
                 
                 
 <?php         
@@ -124,7 +124,7 @@
             </p>
             
             <div class="form-group">
-                <select name='post_status' id=''>
+                <select name='post_status' id='' class="form-control">
                     <option value=''><?php echo $post_status; ?></option>
                     
 <?php
