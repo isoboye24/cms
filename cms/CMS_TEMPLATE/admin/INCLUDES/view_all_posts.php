@@ -35,6 +35,33 @@
                     
                     break;
                     
+                case 'Clone':
+                    $query = "SELECT * FROM posts WHERE post_id = {$post_value_id}";
+                    $select_post_query = mysqli_query($connection, $query);
+                    while($row = mysqli_fetch_array($select_post_query))
+                    {
+                        $post_title = $row['post_title'];
+                        $post_category_id = $row['post_category_id'];
+//                        $post_date = $row['post_date'];
+                        $post_author = $row['post_author'];
+                        $post_status = $row['post_status'];
+                        $post_image = $row['post_image'];
+                        $post_tags = $row['post_tags'];
+                        $post_comment_count = $row['post_comment_count'];
+                        $post_content = $row['post_content'];
+                    }
+                    
+                    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
+                    $query .= "VALUE({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}') ";
+                    
+                    $copy_query = mysqli_query($connection, $query);
+                    
+                    confirmQuery($copy_query);
+                    
+                    break;
+                    
+                    
+                    
                     
             }
         }
@@ -61,6 +88,7 @@
                                       <option value="Published">Published</option>
                                       <option value="Draft">Draft</option>
                                       <option value="Delete">Delete</option>
+                                      <option value="Clone">Clone</option>
                                       
                                </select>                               
                                
