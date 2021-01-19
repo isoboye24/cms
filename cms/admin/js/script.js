@@ -31,3 +31,19 @@ $(document).ready(function () {
 });
 
 
+
+function LoadUsersOnline()
+{
+    $.get("functions.php?onlineusers=result", function(data)
+    {
+          $(".usersonline").text(data);
+    });
+}
+
+//Calling the LoadUsersOnline() function in every 0.5s.
+setInterval(function(){
+    
+    LoadUsersOnline();
+    
+}, 500);
+
