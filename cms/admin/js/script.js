@@ -36,7 +36,7 @@ function LoadUsersOnline()
 {
     $.get("functions.php?onlineusers=result", function(data)
     {
-          $(".usersonline").text(data);
+          $(".onlineusers").text(data);
     });
 }
 

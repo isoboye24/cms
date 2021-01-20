@@ -2,7 +2,7 @@
 
 function users_online()
 {
-    if(isset($_GET['usersonline']))
+    if(isset($_GET['onlineusers']))
     {
         global $connection;
         if(!$connection)
@@ -13,7 +13,7 @@ function users_online()
             $session = session_id();
             
               $time = time();
-              $time_out_in_seconds = 30;      
+              $time_out_in_seconds = 05;      
               $time_out = $time - $time_out_in_seconds;      
 
               $query = "SELECT * FROM users_online WHERE session = '$session' ";
@@ -33,10 +33,13 @@ function users_online()
               $users_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out' ");      
               echo $user_count = mysqli_num_rows($users_online_query);      
         }
-    }    
+    } // GET request isset   
 }
 
 users_online();
+
+
+
 
 
 function ConfirmQuery($result)
