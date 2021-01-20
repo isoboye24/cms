@@ -26,19 +26,9 @@
              $db_user_lastname = $row['user_lastname'];
              $db_user_role = $row['user_role'];
         }
+       
         
-        // Fetch randSalt
-        $query = "SELECT randSalt FROM users"; 
-        $select_randsalt_query = mysqli_query($connection, $query);
-
-        ConfirmQuery($select_randsalt_query);
-        
-        $row = mysqli_fetch_array($select_randsalt_query);
-        $salt = $row['randSalt'];
-        $password = crypt($password, $salt);
-        
-        
-        if($username === $db_username && $password === $db_user_password)
+        if(password_verify($password, $db_user_password))
         {
             // Adding values into session
             $_SESSION['username'] = $db_username;
