@@ -31,8 +31,10 @@
         if(password_verify($password, $db_user_password))
         {
             // Adding values into session
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            
             $_SESSION['username'] = $db_username;
-            $_SESSION['firstname'] = $password;
+            $_SESSION['firstname'] = $db_user_firstname;
             $_SESSION['lastname'] = $db_user_lastname;
             $_SESSION['user_role'] = $db_user_role;
             

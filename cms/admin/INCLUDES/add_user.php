@@ -22,18 +22,10 @@
 //        move_uploaded_file($post_image_temp, "images/$post_image");
         
         
-        // Steps to display shorter password when it is showing long hashed password. But, from PHP 8.0.0 this is no longer needed because PHP has already done with that.
-            $query = "SELECT randSalt FROM users";
-            $select_randSalt_query = mysqli_query($connection, $query);
-            ConfirmQuery($select_randSalt_query);
-            $row = mysqli_fetch_array($select_randSalt_query);        
-            $salt = $row['randSalt'];        
-            // password encryption to prevent hackers
-            $hashed_password = crypt($user_password, $salt);
-        
+       $password = password_hash('$user_password', PASSWORD_BCRYPT, array('cost' => 12));
         
         $query = "INSERT INTO users(username, user_password, user_firstname, user_lastname, user_email, user_role) ";
-        $query .= "VALUE('{$username}', '{$hashed_password}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_role}') ";
+        $query .= "VALUE('{$username}', '{$password}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_role}') ";
         
         $create_post_user = mysqli_query($connection, $query);
         

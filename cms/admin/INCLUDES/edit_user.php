@@ -18,7 +18,7 @@
             $user_firstname = $row['user_firstname']; // name of the select option below
             $username = $row['username']; // name of the select option below
             $user_lastname = $row['user_lastname'];
-            $user_password = $row['user_password'];
+            $db_user_password = $row['user_password'];
             $user_email = $row['user_email'];
             $user_role = $row['user_role'];            
         }
@@ -37,32 +37,22 @@
 //        
         $user_role = $_POST['user_role'];
         
-                
-//        Making the image stay when update post is clicked.
-//        move_uploaded_file($post_image_temp, "images/$post_image");
+         if(!empty($user_password))
+         {
+             $query = "SELECT user_password FROM users WHERE user_id = $the_user_id ";
+             $edit_user_query = mysqli_query($connection, $query);
+             ConfirmQuery($edit_user_query);
+             
+             $row = mysqli_fetch_array($edit_user_query);
+             
+             $db_user_password = $row['user_password'];
+         
         
-//        if(empty($post_image))
-//        {
-//            $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
-//            $select_image = mysqli_query($connection, $query);
-//            
-//            while($row = mysqli_fetch_array($select_image))
-//            {
-//                $post_image = $row['post_image'];
-//            }
-//            
-//        }
-            
-            // Steps to display shorter password when it is showing long hashed password. But, from PHP 8.0.0 this is no longer needed because PHP has already done with that.
-            $query = "SELECT randSalt FROM users";
-            $select_randSalt_query = mysqli_query($connection, $query);
-            ConfirmQuery($select_randSalt_query);
-            $row = mysqli_fetch_array($select_randSalt_query);        
-            $salt = $row['randSalt'];        
-            // password encryption to prevent hackers
-            $hashed_password = crypt($user_password, $salt);
-                
-        
+        if($db_user_password != $user_password)
+        {
+             $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+        }
+           
         //Edit and put the data into the db.
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
@@ -75,7 +65,10 @@
         
         $update_user = mysqli_query($connection, $query);
 
-        ConfirmQuery($update_user);         
+        ConfirmQuery($update_user);
+        
+        echo "User Updated ". "<a href='users.php'>View Users?</a>";
+        }
     }
 
 ?>
