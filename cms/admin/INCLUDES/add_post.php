@@ -51,6 +51,7 @@
 
              <p class="form-group">
 <!--               To show the options of the category from the category table incase it also need to be changed-->
+           <label for="category">Category:</label>
             <select class="form-control" name="post_category" id="">
                 
                 
@@ -77,11 +78,41 @@
               </select>
           
            </p>
+<!--
 
             <p class="form-group">
                 <label for="author">Post Author</label>
                 <input type="text" class="form-control" name="author">
             </p>
+           
+-->
+           <p class="form-group">
+<!--               To show the options of the users from the users -->
+           <label for="author">Author:</label>
+            <select class="form-control" name="author" id="">      
+<?php         
+    
+    $user_query = "SELECT * FROM users ";
+    $select_users = mysqli_query($connection, $user_query);
+                       
+    ConfirmQuery($select_users);                   
+                       
+    while($row = mysqli_fetch_assoc($select_users))
+    {
+        $user_id = $row['user_id'];
+        $username = $row['username'];
+        
+        echo "<option value='$user_id'>{$username}</option>";
+        
+    }
+
+        
+?>
+            
+              </select>
+          
+           </p>
+
            
             <p class="form-group">                
                 <select class="form-control" name="post_status" id="">
