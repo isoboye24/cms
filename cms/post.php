@@ -97,9 +97,9 @@
              }
 
 
-             // query to increment the post comment count                        
-            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";            
-            $query .= "WHERE post_id = $the_post_id ";            
+//             // query to increment the post comment count                        
+//            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";            
+//            $query .= "WHERE post_id = $the_post_id ";            
 
             $update_comment_query = mysqli_query($connection, $query);  
          }
