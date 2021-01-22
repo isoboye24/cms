@@ -1,15 +1,12 @@
 
 <?php 
 
-
-
-
     if(isset($_POST['create_post']))
     {
 //        Taking values from the inputs of the post page
         $post_category_id = $_POST['post_category'];
         $post_title = $_POST['title'];
-        $post_author = $_POST['author'];       
+        $post_user = $_POST['post_user'];       
         $post_status = $_POST['post_status'];       
                 
         $post_image = $_FILES['image']['name'];
@@ -23,8 +20,8 @@
         move_uploaded_file($post_image_temp, "images/$post_image");
         
         //Insert data from the webpage to the db
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status)";
-        $query .= "VALUE('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}') ";
+        $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_content, post_tags, post_status)";
+        $query .= "VALUE('{$post_category_id}', '{$post_title}', '{$post_user}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}') ";
         
         $create_post_query = mysqli_query($connection, $query);
         
@@ -37,7 +34,6 @@
     }
 
 ?>
-   
 
    <form action="" method="post" enctype="multipart/form-data">
    <!--Enctype is in charge of sending form data.-->
@@ -53,7 +49,6 @@
 <!--               To show the options of the category from the category table incase it also need to be changed-->
            <label for="category">Category:</label>
             <select class="form-control" name="post_category" id="">
-                
                 
 <?php         
     
@@ -78,18 +73,11 @@
               </select>
           
            </p>
-<!--
-
-            <p class="form-group">
-                <label for="author">Post Author</label>
-                <input type="text" class="form-control" name="author">
-            </p>
            
--->
            <p class="form-group">
 <!--               To show the options of the users from the users -->
-           <label for="author">Author:</label>
-            <select class="form-control" name="author" id="">      
+           <label for="users">Users:</label>
+            <select class="form-control" name="post_user" id="">      
 <?php         
     
     $user_query = "SELECT * FROM users ";
@@ -102,7 +90,7 @@
         $user_id = $row['user_id'];
         $username = $row['username'];
         
-        echo "<option value='$user_id'>{$username}</option>";
+        echo "<option value='$username'>{$username}</option>";
         
     }
 

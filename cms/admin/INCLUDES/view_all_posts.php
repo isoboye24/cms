@@ -93,9 +93,9 @@
                             <thead>
                                 <tr>
                                    <th><input type="checkbox" id="selectAllBoxes"></th>  
-                                    <th>Id</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
+                                    <th>Id</th>                                    
+                                    <th>User</th>
+                                    <th>Title</th>                                    
                                     <th>Category</th>
                                     <th>Status</th>
                                     <th>Image</th>
@@ -123,6 +123,7 @@
         $post_category_id = $row['post_category_id'];
         $post_title = $row['post_title'];
         $post_author = $row['post_author'];
+        $post_user = $row['post_user'];
         $post_date = $row['post_date'];
         $post_image = $row['post_image'];
         $post_tags = $row['post_tags'];
@@ -132,14 +133,25 @@
 
         echo "<tr>"; 
 ?>
-             <td><input type='checkbox' class='checkBoxes' name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>       
-               
-                             
+             <td><input type='checkbox' class='checkBoxes' name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>                     
 <?php
        
         echo "<td>{$post_id}</td>";
+        
+        if(!empty($post_author))
+        {
+            echo "<td>{$post_author}</td>";
+        }
+        else if(!empty($post_user))
+        {
+            echo "<td>{$post_user}</td>";
+        }
+        else
+        {
+            echo "<td>ANONYMOUS</td>";
+        }
+        
         echo "<td>{$post_title}</td>";
-        echo "<td>{$post_author}</td>";
         
 
     $query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
@@ -160,13 +172,8 @@
             $send_comment_query = mysqli_query($connection, $query);
             $row = mysqli_fetch_array($send_comment_query);            
             $count_comments = mysqli_num_rows($send_comment_query);
-        
-            
+
             echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
-        
-        
-        
-        
         
             echo "<td>{$post_tags}</td>";
             echo "<td>{$post_date}</td>";
