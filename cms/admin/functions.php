@@ -1,5 +1,14 @@
 <?php 
 
+// This function should be used to escape all the data from the DB to prevent hackers.
+function Escape()
+{
+    global $connection;
+    
+    return mysqli_real_escape_string($connection, trim($string));
+}
+
+
 function users_online()
 {
     if(isset($_GET['onlineusers']))

@@ -1,4 +1,3 @@
-
 <?php 
 
     if(isset($_POST['create_post']))
@@ -12,7 +11,7 @@
         $post_image = $_FILES['image']['name'];
         $post_image_temp = $_FILES['image']['tmp_name'];
         
-        $post_date = date('d-m-y');
+//        $post_date = date('d-m-y');
         $post_tags = $_POST['post_tags'];
         $post_content = $_POST['post_content'];
         
@@ -59,8 +58,11 @@
                        
     while($row = mysqli_fetch_assoc($select_categories))
     {
-        $cat_id = $row['cat_id'];
-        $cat_title = $row['cat_title'];
+        $escaped_cat_id = Escape('cat_id');
+        $escaped_cat_title = Escape('cat_title');        
+            
+        $cat_id = $row[$escaped_cat_id];
+        $cat_title = $row[$escaped_cat_title];
         
         echo "<option value='$cat_id'>{$cat_title}</option>";
         
@@ -87,8 +89,11 @@
                        
     while($row = mysqli_fetch_assoc($select_users))
     {
-        $user_id = $row['user_id'];
-        $username = $row['username'];
+        $escaped_user_id = 'user_id';
+        $escaped_username = 'username';
+        
+        $user_id = $row[$escaped_user_id];
+        $username = $row[$escaped_username];
         
         echo "<option value='$username'>{$username}</option>";
         
