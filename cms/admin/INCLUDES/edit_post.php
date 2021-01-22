@@ -15,7 +15,7 @@
             $post_id = $row['post_id'];
             $post_category_id = $row['post_category_id']; // name of the select option below
             $post_title = $row['post_title'];
-            $post_author = $row['post_author'];
+            $post_user = $row['post_user'];
             $post_date = $row['post_date'];
             $post_image = $row['post_image'];
             $post_content = $row['post_content'];
@@ -30,7 +30,7 @@
          // Pick from the input box to the exact variables holding data from the db in the above. Thereby changing them. This section is basically for the post_category and image settings.
         $post_category_id = $_POST['post_category'];
         $post_title = $_POST['post_title'];
-        $post_author = $_POST['post_author'];       
+        $post_user = $_POST['post_user'];       
         $post_status = $_POST['post_status'];       
                 
         $post_image = $_FILES['image']['name'];
@@ -60,7 +60,7 @@
         $query = "UPDATE posts SET ";
         $query .= "post_category_id = '{$post_category_id}', ";
         $query .= "post_title = '{$post_title}', ";
-        $query .= "post_author = '{$post_author}', ";
+        $query .= "post_user = '{$post_user}', ";
         $query .= "post_status = '{$post_status}', ";
         $query .= "post_tags = '{$post_tags}', ";
         $query .= "post_image = '{$post_image}', ";
@@ -76,8 +76,6 @@
     }
 
 ?>
-    
-    
 
    <form action="" method="post" enctype="multipart/form-data">
    <!--Enctype is in charge of sending form data.-->
@@ -91,9 +89,9 @@
 
             <p class="form-group">
 <!--               To show the options of the category from the category table incase it also need to be changed-->
+           <label for="categories">Categories:</label>
             <select name="post_category" id="" class="form-control">
-                
-                
+           
 <?php         
     
     $query = "SELECT * FROM categories ";
@@ -112,16 +110,36 @@
 
         
 ?>
-             
-             
+    
               </select>
           
            </p>
 
             <p class="form-group">
-                <label for="author">Post Author</label>
-                <input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>">
-            </p>
+<!--               To show the options of the users from the users -->
+           <label for="users">Users:</label>
+            <select class="form-control" name="post_user" id="">      
+<?php         
+    
+    $user_query = "SELECT * FROM users ";
+    $select_users = mysqli_query($connection, $user_query);
+                       
+    ConfirmQuery($select_users);                   
+                       
+    while($row = mysqli_fetch_assoc($select_users))
+    {
+        $user_id = $row['user_id'];
+        $username = $row['username'];
+        
+        echo "<option value='$username'>{$username}</option>";
+        
+    }
+     
+?>
+            
+              </select>
+          
+           </p>
             
             <div class="form-group">
                 <select name='post_status' id='' class="form-control">
@@ -138,25 +156,11 @@
          echo "<option value='Published'>Publish</option>";
      }
 
-
-
 ?>
-                    
-                    
-                    
+         
                 </select>
             </div>
             
-            
-            
-
-<!--
-            <p class="form-group">
-                <label for="post_status">Post Status</label>
-                <input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
-            </p>
--->
-
             <p class="form-group">
                 <label for="post_image">Post Image</label><br>
                 <img width="100" src="images/<?php echo $post_image; ?>" alt="Image">
