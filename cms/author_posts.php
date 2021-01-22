@@ -21,14 +21,26 @@
    }
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
-    $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' "; 
+    $query = "SELECT * FROM posts WHERE post_user = '{$the_post_author}' "; 
+    
+//    my code            
+    $select_user_posts_query = mysqli_query($connection, $query);
+    $row2 = mysqli_fetch_assoc($select_user_posts_query);
+    $post_user = $row2['post_user'];
+?>
+      
+       <p class="lead">
+            All posts by <?php echo $post_user; ?>
+        </p>
+<!--        my code-->
 
+<?php
+                
     $select_all_posts_query = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
+        $post_title = $row['post_title'];        
         $post_date = $row['post_date'];
         $post_image = $row['post_image'];
         $post_content = $row['post_content'];
@@ -47,9 +59,7 @@
             <h2>
                 <a href="#"><?php echo $post_title; ?></a>
             </h2>
-            <p class="lead">
-                All posts by <?php echo $post_author; ?>
-            </p>
+            
             <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date; ?></p>
             <hr>
             <img class="img-responsive" src="admin/images/<?php echo $post_image; ?>" alt="Image not found">

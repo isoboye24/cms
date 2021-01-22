@@ -118,7 +118,10 @@
             <p class="form-group">
 <!--               To show the options of the users from the users -->
            <label for="users">Users:</label>
-            <select class="form-control" name="post_user" id="">      
+            <select class="form-control" name="post_user" id="">
+            
+<?php echo "<option value='$post_user'>{$post_user}</option>"; ?>
+                        
 <?php         
     
     $user_query = "SELECT * FROM users ";
@@ -141,9 +144,9 @@
           
            </p>
             
-            <div class="form-group">
+            <div class="form-group">               
                 <select name='post_status' id='' class="form-control">
-                    <option value=''><?php echo $post_status; ?></option>
+                    <option value='Draft'><?php echo $post_status; ?></option>
                     
 <?php
 
