@@ -3,17 +3,17 @@
     if(isset($_POST['create_post']))
     {
 //        Taking values from the inputs of the post page
-        $post_category_id = $_POST['post_category'];
-        $post_title = $_POST['title'];
-        $post_user = $_POST['post_user'];       
-        $post_status = $_POST['post_status'];       
-                
-        $post_image = $_FILES['image']['name'];
-        $post_image_temp = $_FILES['image']['tmp_name'];
+        $post_category_id = Escape($_POST['post_category']);
+        $post_title = Escape($_POST['title']);
+        $post_user = Escape($_POST['post_user']);
+        $post_status = Escape($_POST['post_status']);
         
+        $post_image = Escape($_FILES['image']['name']);
+        $post_image_temp = Escape($_FILES['image']['tmp_name']);
+
 //        $post_date = date('d-m-y');
-        $post_tags = $_POST['post_tags'];
-        $post_content = $_POST['post_content'];
+        $post_tags = Escape($_POST['post_tags']);
+        $post_content = Escape($_POST['post_content']);
         
         //Function for uploading files
         move_uploaded_file($post_image_temp, "images/$post_image");
@@ -58,11 +58,11 @@
                        
     while($row = mysqli_fetch_assoc($select_categories))
     {
-        $escaped_cat_id = Escape('cat_id');
-        $escaped_cat_title = Escape('cat_title');        
+//        $escaped_cat_id = Escape('cat_id');
+//        $escaped_cat_title = Escape('cat_title');        
             
-        $cat_id = $row[$escaped_cat_id];
-        $cat_title = $row[$escaped_cat_title];
+        $cat_id = Escape($row['cat_id']);
+        $cat_title = Escape($row['cat_title']);        
         
         echo "<option value='$cat_id'>{$cat_title}</option>";
         
@@ -88,12 +88,9 @@
     ConfirmQuery($select_users);                   
                        
     while($row = mysqli_fetch_assoc($select_users))
-    {
-        $escaped_user_id = 'user_id';
-        $escaped_username = 'username';
-        
-        $user_id = $row[$escaped_user_id];
-        $username = $row[$escaped_username];
+    {        
+        $user_id = Escape($row['user_id']);
+        $username = Escape($row['username']);
         
         echo "<option value='$username'>{$username}</option>";
         

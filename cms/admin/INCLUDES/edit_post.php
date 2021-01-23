@@ -3,7 +3,7 @@
     //To get the id value from the url
     if(isset($_GET['p_id']))
     {
-        $the_post_id = $_GET['p_id'];
+        $the_post_id = Escape($_GET['p_id']);
     }
 
         //Take the data from the db where the id = id of the url
@@ -12,33 +12,32 @@
 
         while($row = mysqli_fetch_assoc($select_posts_by_id))
         {
-            $post_id = $row['post_id'];
-            $post_category_id = $row['post_category_id']; // name of the select option below
-            $post_title = $row['post_title'];
-            $post_user = $row['post_user'];
-            $post_date = $row['post_date'];
-            $post_image = $row['post_image'];
-            $post_content = $row['post_content'];
-            $post_tags = $row['post_tags'];
-            $post_comment_count = $row['post_comment_count'];
-            $post_status = $row['post_status'];        
-
+            $post_id = Escape($row['post_id']);
+            $post_category_id = Escape($row['post_category_id']);
+            $post_title = Escape($row['post_title']);
+            $post_user = Escape($row['post_user']);
+            $post_date = Escape($row['post_date']);
+            
+            $post_image = Escape($row['post_image']);
+            $post_content = Escape($row['post_content']);
+            $post_tags = Escape($row['post_tags']);
+            $post_comment_count = Escape($row['post_comment_count']);
+            $post_status = Escape($row['post_status']);
         }
 
     if(isset($_POST['update_post']))
     {
          // Pick from the input box to the exact variables holding data from the db in the above. Thereby changing them. This section is basically for the post_category and image settings.
-        $post_category_id = $_POST['post_category'];
-        $post_title = $_POST['post_title'];
-        $post_user = $_POST['post_user'];       
-        $post_status = $_POST['post_status'];       
-                
-        $post_image = $_FILES['image']['name'];
-        $post_image_temp = $_FILES['image']['tmp_name'];        
+        $post_category_id = Escape($_POST['post_category']);
+        $post_title = Escape($_POST['post_title']);
+        $post_user = Escape($_POST['post_user']);
+        $post_status = Escape($_POST['post_status']);
         
-        $post_tags = $_POST['post_tags'];
-        $post_content = $_POST['post_content'];
-        
+        $post_image = Escape($_FILES['image']['name']);
+        $post_image_temp = Escape($_FILES['image']['tmp_name']);
+        $post_tags = Escape($_POST['post_tags']);
+        $post_content = Escape($_POST['post_content']);
+
                 
 //        Making the image stay when update post is clicked.
         move_uploaded_file($post_image_temp, "images/$post_image");
@@ -50,13 +49,12 @@
             
             while($row = mysqli_fetch_array($select_image))
             {
-                $post_image = $row['post_image'];
+                $post_image = Escape($row['post_image']);
             }
             
         }
         
-        
-        //Edit and put the data into the db.
+        // Put back to the data into the DB.
         $query = "UPDATE posts SET ";
         $query .= "post_category_id = '{$post_category_id}', ";
         $query .= "post_title = '{$post_title}', ";
@@ -101,13 +99,12 @@
                        
     while($row = mysqli_fetch_assoc($select_categories))
     {
-        $cat_id = $row['cat_id'];
-        $cat_title = $row['cat_title'];
+        $cat_id = Escape($row['cat_id']);
+        $cat_title = Escape($row['cat_title']);
         
         echo "<option value='$cat_id'>{$cat_title}</option>";
         
     }
-
         
 ?>
     
@@ -131,17 +128,16 @@
                        
     while($row = mysqli_fetch_assoc($select_users))
     {
-        $user_id = $row['user_id'];
-        $username = $row['username'];
+        $user_id = Escape($row['user_id']);
+        $username = Escape($row['username']);
         
         echo "<option value='$username'>{$username}</option>";
         
-    }
-     
+    }     
 ?>
             
               </select>
-          
+              
            </p>
             
             <div class="form-group">               
@@ -177,7 +173,7 @@
 
             <p class="form-group">
                 <label for="post_content">Post Content</label> <br>
-                <textarea class="form-control" name="post_content" id="" cols="30" rows="10" >
+                <textarea class="form-control" name="post_content" id="body" cols="30" rows="10" >
                 
                 <?php echo $post_content; ?>
                 

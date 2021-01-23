@@ -20,7 +20,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
                     
 <?php
-    $escaped_username = 'username';
+    $escaped_username = Escape('username');
                         
 //    To echo the username as profile name
      if(isset($_SESSION[$escaped_username]))

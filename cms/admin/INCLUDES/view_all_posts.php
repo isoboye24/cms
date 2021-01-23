@@ -4,7 +4,7 @@
     {
         foreach($_POST['checkboxArray'] as $post_value_id)
         {
-            $bulk_options = $_POST['bulk_options'];
+            $bulk_options = Escape($_POST['bulk_options']);
             
             switch($bulk_options)
             {
@@ -40,16 +40,15 @@
                     $select_post_query = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_array($select_post_query))
                     {
-                        $post_title = $row['post_title'];
-                        $post_category_id = $row['post_category_id'];
-//                        $post_date = $row['post_date'];
-                        $post_author = $row['post_author'];
-                        $post_status = 'Cloned';
-                        $post_image = $row['post_image'];
-                        $post_tags = $row['post_tags'];
-                        $post_comment_count = 0;
-                        $post_content = $row['post_content'];
-                        $post_views_count = $row['post_views_count'];
+                        $post_title = Escape($row['post_title']);
+                        $post_category_id = Escape($row['post_category_id']);
+                        $post_author = Escape($row['post_author']);
+                        $post_status = Escape($row['post_status']);
+                        $post_image = Escape($row['post_image']);
+                        $post_tags = Escape($row['post_tags']);
+                        $post_comment_count = Escape($row['post_comment_count']);
+                        $post_content = Escape($row['post_content']);
+                        $post_views_count = Escape($row['post_views_count']);
                     }
                     
                     $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status, post_views_count) ";
@@ -60,7 +59,6 @@
                     confirmQuery($copy_query);
                     
                     break;
-       
             }
         }
     }
@@ -119,18 +117,18 @@
     
     while($row = mysqli_fetch_assoc($select_posts))
     {
-        $post_id = $row['post_id'];
-        $post_category_id = $row['post_category_id'];
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
-        $post_user = $row['post_user'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
-        $post_views_count = $row['post_views_count'];
-
+        $post_id = Escape($row['post_id']);
+        $post_category_id = Escape($row['post_category_id']);
+        $post_title = Escape($row['post_title']);
+        $post_author = Escape($row['post_author']);
+        $post_user = Escape($row['post_user']);        
+        $post_date = Escape($row['post_date']);
+        $post_image = Escape($row['post_image']);
+        $post_tags = Escape($row['post_tags']);
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);
+        $post_views_count = Escape($row['post_views_count']);
+        
         echo "<tr>"; 
 ?>
              <td><input type='checkbox' class='checkBoxes' name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>                     
@@ -159,9 +157,9 @@
 
     while($row = mysqli_fetch_assoc($select_categories_id))
     {
-        $cat_id = $row['cat_id'];
-        $cat_title = $row['cat_title'];
-
+        $cat_id = Escape($row['cat_id']);
+        $cat_title = Escape($row['cat_title']);
+        
         echo "<td>{$cat_title}</td>";
     }
 
@@ -195,7 +193,7 @@
 
     if(isset($_GET['delete']))
     {
-        $the_post_id = $_GET['delete'];
+        $the_post_id = Escape($_GET['delete']);
 
         $query = "DELETE FROM posts WHERE post_id = {$the_post_id}";
 
@@ -206,7 +204,7 @@
 
     if(isset($_GET['reset']))
     {
-        $the_post_id = $_GET['reset'];
+        $the_post_id = Escape($_GET['reset']);
 
         $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$the_post_id}";
 

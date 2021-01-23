@@ -20,49 +20,50 @@
             $user_lastname = $row['user_lastname'];
             $db_user_password = $row['user_password'];
             $user_email = $row['user_email'];                      
-        }
+       
+        }  
+            if(isset($_POST['edit_user']))
+            {
 
-        if(isset($_POST['update_user']))
-        {
+                $user_firstname = $_POST['user_firstname'];
+                $user_lastname = $_POST['user_lastname'];
+                $username = $_POST['username'];       
+                $user_password = $_POST['user_password'];       
+                $user_email = $_POST['user_email'];       
 
-            $user_firstname = $_POST['user_firstname'];
-            $user_lastname = $_POST['user_lastname'];
-            $username = $_POST['username'];       
-            $user_password = $_POST['user_password'];       
-            $user_email = $_POST['user_email'];       
+                 if(!empty($user_password))
+                 {
+                     $password_query = "SELECT user_password FROM users WHERE user_id = $the_user_id ";
+                     $edit_user_query = mysqli_query($connection, $password_query);
+                     ConfirmQuery($edit_user_query);
 
-             if(!empty($user_password))
-             {
-                 $password_query = "SELECT user_password FROM users WHERE user_id = $the_user_id ";
-                 $edit_user_query = mysqli_query($connection, $password_query);
-                 ConfirmQuery($edit_user_query);
+                     $row = mysqli_fetch_array($edit_user_query);
 
-                 $row = mysqli_fetch_array($edit_user_query);
-
-                 $db_user_password = $row['user_password'];
+                     $db_user_password = $row['user_password'];
 
 
-                if($db_user_password != $user_password)
-                {
-                     $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+                    if($db_user_password != $user_password)
+                    {
+                         $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+                    }
+
+                    //Edit and put the data into the db.
+                    $query = "UPDATE users SET ";
+                    $query .= "user_firstname = '{$user_firstname}', ";
+                    $query .= "user_lastname = '{$user_lastname}', ";
+                    $query .= "username = '{$username}', ";
+                    //$query .= "user_password = '{$hashed_password}', ";
+                    $query .= "user_email = '{$user_email}', ";                                
+                    $query .= "WHERE user_id = {$the_user_id} ";
+
+                    $update_user = mysqli_query($connection, $query);
+
+                    ConfirmQuery($update_user);
+
                 }
-
-                //Edit and put the data into the db.
-                $query = "UPDATE users SET ";
-                $query .= "user_firstname = '{$user_firstname}', ";
-                $query .= "user_lastname = '{$user_lastname}', ";
-                $query .= "username = '{$username}', ";
-                $query .= "user_password = '{$hashed_password}', ";
-                $query .= "user_email = '{$user_email}', ";                                
-                $query .= "WHERE user_id = {$the_user_id} ";
-
-                $update_user = mysqli_query($connection, $query);
-
-                ConfirmQuery($update_user);
-                
+                echo "User Updated ". "<a href='users.php'>View Users?</a>";
             }
-            echo "User Updated ". "<a href='users.php'>View Users?</a>";
-        }
+        
     }
     else
     {
@@ -103,7 +104,7 @@
             </p>
             
             <p class="form-group">            
-                <input type="submit" class="btn btn-primary" name="update_user" value="Update User">
+                <input type="submit" class="btn btn-primary" name="edit_user" value="Update User">
             </p>                        
         
        </div>     
