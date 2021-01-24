@@ -1,6 +1,5 @@
 <?php include "INCLUDES/db.php"; ?>
 <?php include "INCLUDES/header.php"; ?>
-<?php include "admin/functions.php"; ?>
 
     <!-- Navigation -->
 <?php include "INCLUDES/navigation.php"; ?>    
