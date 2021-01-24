@@ -16,7 +16,7 @@
                 
    if(isset($_GET['p_id']))
    {
-       $the_post_id = $_GET['p_id'];
+       $the_post_id = Escape($_GET['p_id']);
    }
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
@@ -26,15 +26,14 @@
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = $row['post_content'];
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
-
+        $post_title = Escape($row['post_title']);
+        $post_author = Escape($row['post_date']);
+        $post_date = Escape($row['post_title']);
+        $post_image = Escape($row['post_image']);
+        $post_content = Escape($row['post_content']);
+        $post_tags = Escape($row['post_tags']);
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);        
 ?>
         
            <h1 class="page-header">
@@ -66,11 +65,11 @@
                 
      if(isset($_POST['create_comment']))
      {
-         $the_post_id = $_GET['p_id'];
+         $the_post_id = $_GET[Escape('p_id')];
          
-         $comment_author =$_POST['comment_author'];
-         $comment_email =$_POST['comment_email'];
-         $comment_content =$_POST['comment_content'];
+         $comment_author = $_POST[Escape('comment_author')];
+         $comment_email = $_POST[Escape('comment_email')];
+         $comment_content = $_POST[Escape('comment_content')];
          
          $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
          
@@ -117,7 +116,6 @@
                 </div>
            <hr>
 
-               
                 <!-- Posted Comments -->
                 
 <?php
@@ -134,10 +132,9 @@
 
      while($row = mysqli_fetch_array($select_comment_query))
      {
-         $comment_date = $row['comment_date'];
-         $comment_content = $row['comment_content'];
-         $comment_author = $row['comment_author'];
-         
+         $comment_date = Escape($row['comment_date']);
+         $comment_content = Escape($row['comment_content']);
+         $comment_author = Escape($row['comment_author']);         
 ?> 
                 <!-- Comment -->
                 <div class="media">
@@ -155,9 +152,7 @@
 <?php       
      }               
 ?>
-     
 
-                
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

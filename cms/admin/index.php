@@ -73,12 +73,9 @@
     $select_all_comments = mysqli_query($connection, $query);
                             
     $comment_count = mysqli_num_rows($select_all_comments);                        
-
     echo "<div class='huge'>{$comment_count}</div>";                        
 ?> 
-      
-                         
-                         
+     
                           <div>Comments</div>
                         </div>
                     </div>
@@ -111,10 +108,7 @@
 
     echo "<div class='huge'>{$user_count}</div>";                        
 ?>    
-                           
-                           
-                           
-                           
+              
                             <div> Users</div>
                         </div>
                     </div>
@@ -165,7 +159,6 @@
     </div>
                     <!-- /.row -->
                     
-                  
                     
 <?php 
 
@@ -183,9 +176,7 @@
 
     $query = "SELECT * FROM users WHERE user_role = 'Subscriber' ";
     $select_all_subscribers = mysqli_query($connection, $query);                      
-    $subscribers_count = mysqli_num_rows($select_all_subscribers);                        
-
-   
+    $subscribers_count = mysqli_num_rows($select_all_subscribers);               
 ?>                         
                
                     

@@ -40,15 +40,7 @@
 
             <!-- /.input-group -->
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
+   
 
         <!-- Blog Categories Well -->
         <div class="well">
@@ -69,8 +61,8 @@
  
         while($row = mysqli_fetch_assoc($select_categories_sidebar))
         {
-            $cat_title = $row['cat_title'];
-            $cat_id = $row['cat_id'];
+            $cat_title = Escape($row['cat_title']);
+            $cat_id = Escape($row['cat_id']);
             
             //Senidng the cat_id to the category.php page using the superglobal GET.
             echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";

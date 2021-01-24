@@ -5,8 +5,9 @@ function Escape($string)
 {
     global $connection;
     
-    return mysqli_real_escape_string($connection, trim(strip_tags($string)));
+    return mysqli_real_escape_string($connection, trim($string));
 }
+
 
 function users_online()
 {
@@ -47,11 +48,9 @@ function users_online()
 users_online();
 
 
-
-
-
 function ConfirmQuery($result)
 {
+    global $connection;
     if(!$result)
     {
         die("QUERY FAILED".mysqli_error($connection));

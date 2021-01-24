@@ -17,7 +17,7 @@
                 
    if(isset($_GET['p_id']))
    {
-       $the_post_id = $_GET['p_id'];
+       $the_post_id = Escape($_GET['p_id']);
        
        $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$the_post_id} ";
        $send_query = mysqli_query($connection, $view_query);
@@ -31,16 +31,15 @@
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
-        $post_user = $row['post_user'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = $row['post_content'];
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
-
+        $post_title = Escape($row['post_title']);
+        $post_author = Escape($row['post_author']);
+        $post_user = Escape($row['post_user']);
+        $post_date = Escape($row['post_date']);
+        $post_image = Escape($row['post_image']);
+        $post_content = Escape($row['post_content']);
+        $post_tags = Escape($row['post_tags']);
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);        
 ?>
         
            <h1 class="page-header">
@@ -78,16 +77,17 @@
                 
      if(isset($_POST['create_comment']))
      {
-         $the_post_id = $_GET['p_id'];
+         $the_post_id = Escape($_GET['p_id']);
          
-         $comment_author =$_POST['comment_author'];
-         $comment_email =$_POST['comment_email'];
-         $comment_content =$_POST['comment_content'];
+         $comment_author = Escape($_POST['comment_author']);
+         $comment_email = Escape($_POST['comment_email']);
+         $comment_content = Escape($_POST['comment_content']);
          
          if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content))
          {
+             
              $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
-
+             
              $query .= "VALUE($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'Unapproved', 'now()') ";
 
              $create_comment = mysqli_query($connection, $query);
@@ -96,11 +96,6 @@
              {
                  die("QUERY FAILED ". mysqli_error($connection));
              }
-
-
-//             // query to increment the post comment count                        
-//            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";            
-//            $query .= "WHERE post_id = $the_post_id ";            
 
             $update_comment_query = mysqli_query($connection, $query);  
          }
@@ -152,10 +147,9 @@
 
      while($row = mysqli_fetch_array($select_comment_query))
      {
-         $comment_date = $row['comment_date'];
-         $comment_content = $row['comment_content'];
-         $comment_author = $row['comment_author'];
-         
+         $comment_date = Escape($row['comment_date']);
+         $comment_content = Escape($row['comment_content']);
+         $comment_author = Escape($row['comment_author']);        
 ?> 
                 <!-- Comment -->
                 <div class="media">
@@ -174,8 +168,6 @@
      }               
 ?>
      
-
-                
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

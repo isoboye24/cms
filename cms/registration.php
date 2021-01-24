@@ -6,17 +6,12 @@
 
     if(isset($_POST['submit']))
     {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $username = $_POST[Escape('username')];
+        $email = $_POST[Escape('email')];
+        $password = $_POST[Escape('password')];
         
          if(!empty($username) && !empty($email) && !empty($password))
          {
-                 //Using the escape to test and clear it.
-            $username = mysqli_real_escape_string($connection, $username);
-            $email = mysqli_real_escape_string($connection, $email);
-            $password = mysqli_real_escape_string($connection, $password);
-             
             $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
             $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
@@ -40,8 +35,6 @@
 
 ?>
 
-   
-   
     <!-- Navigation -->
     
     <?php  include "includes/navigation.php"; ?>

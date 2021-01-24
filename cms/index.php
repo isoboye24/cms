@@ -17,7 +17,7 @@
         
      if(isset($_GET['page']))
      {
-         $page = $_GET['page'];
+         $page = Escape($_GET['page']);
      }
      else
      {
@@ -34,17 +34,13 @@
          $page_1 = ($page * $per_page) - $per_page;
      }
                 
-                
-                
-                
+   
      $post_query_count = "SELECT * FROM posts";           
      $find_count = mysqli_query($connection, $post_query_count);           
      $count = mysqli_num_rows($find_count);           
      
      $count = ceil($count / $per_page);           
-                
-                
-                
+                          
                 
     $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
 
@@ -52,15 +48,15 @@
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_id = $row['post_id'];
-        $post_title = $row['post_title'];
-        $post_user = $row['post_user'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = substr($row['post_content'], 0, 100);
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
+        $post_id = Escape($row['post_id']);
+        $post_title = Escape($row['post_title']);
+        $post_user = Escape($row['post_user']);
+        $post_date = Escape($row['post_date']);
+        $post_image = Escape($row['post_image']);
+        $post_tags = Escape($row['post_tags']);
+        $post_content = Escape(substr($row['post_content'], 0, 1000));        
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);        
         
         if($post_status == "Published")
         {   
@@ -127,10 +123,6 @@
 ?>
             
         </ul>
-        
-        
-        
-        
         
 
  <?php include "INCLUDES/footer.php"; ?>

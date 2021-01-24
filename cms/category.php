@@ -16,7 +16,7 @@
     
     if(isset($_GET['category']))
     {
-        $post_category_id = $_GET['category'];
+        $post_category_id = Escape($_GET['category']);
     }
                 
     $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
@@ -25,16 +25,15 @@
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_id = $row['post_id'];
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = substr($row['post_content'], 0, 100);
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
-                
+        $post_id = Escape($row['post_id']);
+        $post_title = Escape($row['post_title']);
+        $post_author = Escape($row['post_author']);
+        $post_date = Escape($row['post_date']);
+        $post_image = Escape($row['post_image']);
+        $post_content = Escape(substr($row['post_content'], 0, 1000));
+        $post_tags = Escape($row['post_tags']);
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);           
 ?>
         
            <h1 class="page-header">

@@ -1,4 +1,5 @@
- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+ <?php include "admin/functions.php" ?>
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <?php session_start(); ?>
            
@@ -25,7 +26,7 @@
                     
                     while($row = mysqli_fetch_assoc($select_all_categories_query))
                     {
-                        $cat_title = $row['cat_title'];
+                        $cat_title = Escape($row['cat_title']);
                         echo "<li><a href='#'>{$cat_title}</a></li>";
                     }
                     
@@ -47,7 +48,7 @@
      {
          if(isset($_GET['p_id']))
          {
-             $the_post_id = $_GET['p_id'];
+             $the_post_id = Escape($_GET['p_id']);
              echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit post</a></li>";
          }
      }

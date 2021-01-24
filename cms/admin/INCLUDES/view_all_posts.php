@@ -207,10 +207,6 @@
         $the_post_id = Escape($_GET['reset']);
 
         $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$the_post_id}";
-
-    //    To add escape
-    //    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =" .mysqli_real_escape_string($the_post_id)";
-
         $reset_query = mysqli_query($connection, $query);
         header("Location: posts.php");
 

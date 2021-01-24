@@ -23,7 +23,7 @@
 
     if(isset($_GET['source']))
     {
-        $source = $_GET['source'];
+        $source = Escape($_GET['source']);
     }
     else
     {

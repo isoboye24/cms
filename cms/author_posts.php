@@ -16,8 +16,8 @@
                 
    if(isset($_GET['p_id']))
    {
-       $the_post_id = $_GET['p_id'];
-       $the_post_author = $_GET['author'];
+       $the_post_id = Escape($_GET['p_id']);
+       $the_post_author = Escape($_GET['author']);
    }
                 
 //Catching the post_id sent by the index.php file by using the superglobal GET
@@ -26,7 +26,7 @@
 //    my code            
     $select_user_posts_query = mysqli_query($connection, $query);
     $row2 = mysqli_fetch_assoc($select_user_posts_query);
-    $post_user = $row2['post_user'];
+    $post_user = Escape($row2['post_user']);
 ?>
       
        <p class="lead">
@@ -40,14 +40,13 @@
 
     while($row = mysqli_fetch_assoc($select_all_posts_query))
     {
-        $post_title = $row['post_title'];        
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = $row['post_content'];
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_status = $row['post_status'];
-
+        $post_title = Escape($row['post_title']);
+        $post_date = Escape($row['post_date']);
+        $post_image = Escape($row['post_image']);
+        $post_content = Escape($row['post_content']);
+        $post_tags = Escape($row['post_tags']);
+        $post_comment_count = Escape($row['post_comment_count']);
+        $post_status = Escape($row['post_status']);        
 ?>
         
            <h1 class="page-header">

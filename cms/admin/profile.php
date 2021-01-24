@@ -5,7 +5,7 @@
 
     if(isset($_SESSION['username']))
     {
-        $username = $_SESSION['username'];
+        $username = Escape($_SESSION['username']);
         
         $query = "SELECT * FROM users WHERE username = '{$username}' ";
         
@@ -13,18 +13,16 @@
         
         while($row = mysqli_fetch_array($select_user_profile_query))
         {
-            $user_id = $row['user_id'];
-            $username = $row['username'];
-            $user_password = $row['user_password'];
-            $user_firstname = $row['user_firstname'];
-            $user_lastname = $row['user_lastname'];
-            $user_email = $row['user_email'];        
-            $user_image = $row['user_image'];
-            $user_role = $row['user_role'];
+            $user_id = Escape($row['user_id']);
+            $username = Escape($row['username']);
+            $user_password = Escape($row['user_password']);
+            $user_firstname = Escape($row['user_firstname']);
+            $user_lastname = Escape($row['user_lastname']);
+            $user_email = Escape($row['user_email']);
+            $user_image = Escape($row['user_image']);
+            $user_role = Escape($row['user_role']);
         }
     }
-
-
 
 ?>   
  
@@ -32,13 +30,11 @@
 
 if(isset($_POST['update_user']))
     {
-         
-        $user_firstname = $_POST['user_firstname'];
-        $user_lastname = $_POST['user_lastname'];
-        $username = $_POST['username'];       
-        $user_password = $_POST['user_password'];       
-        $user_email = $_POST['user_email'];       
-                
+        $user_firstname = Escape($_POST['user_firstname']);
+        $user_lastname = Escape($_POST['user_lastname']);
+        $username = Escape($_POST['username']);
+        $user_password = Escape($_POST['user_password']);
+        $user_email = Escape($_POST['user_email']);  
         
         //Edit and put the data into the db.
         $query = "UPDATE users SET ";
