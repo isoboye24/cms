@@ -1,12 +1,16 @@
  <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Username</th>                                    
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
-                                    <th>Role</th>            
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Username</th>                                    
+                                    <th class="text-center">Firstname</th>
+                                    <th class="text-center">Lastname</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Role</th>            
+                                    <th class="text-center">Add Role</th>            
+                                    <th class="text-center">Add Role</th>            
+                                    <th class="text-center">Edit</th>            
+                                    <th class="text-center">Delete</th>            
                                 </tr>
                             </thead>
                             <tbody>
