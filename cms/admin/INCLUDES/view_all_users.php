@@ -10,7 +10,7 @@
                                     <th class="text-center">Add Role</th>            
                                     <th class="text-center">Add Role</th>            
                                     <th class="text-center">Edit</th>            
-                                    <th class="text-center">Delete</th>            
+                                    <th class="text-center">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>

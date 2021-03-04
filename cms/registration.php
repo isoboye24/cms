@@ -1,6 +1,8 @@
 <?php  include "INCLUDES/db.php"; ?>
  <?php  include "INCLUDES/header.php"; ?>
- <?php  include "admin/functions.php"; ?>
+ 
+ <!-- Navigation -->
+    <?php  include "includes/navigation.php"; ?>
 
 <?php
 
@@ -35,11 +37,6 @@
 
 ?>
 
-    <!-- Navigation -->
-    
-    <?php  include "includes/navigation.php"; ?>
-    
- 
     <!-- Page Content -->
     <div class="container">
     
